@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/mainLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <EditText
+            android:id="@+id/search_dbpedia_query"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/search_dbpedia"/>
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="@string/search_dbpedia"
+            android:onClick="searchDbpedia"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mainLinear">
+
+                <ListView
+                    android:id="@+id/dbpedia_results2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:padding="0dp" />
+
+        <!--        <ListView-->
+        <!--            android:id="@+id/dbpedia_results3"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="10dp"-->
+        <!--            android:padding="20dp"/>-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/image"-->
+        <!--            android:layout_width="100dp"-->
+        <!--            android:layout_height="100dp"-->
+        <!--            android:contentDescription="moving object"-->
+        <!--            />-->
+
+    </RelativeLayout>
+
+</RelativeLayout>
