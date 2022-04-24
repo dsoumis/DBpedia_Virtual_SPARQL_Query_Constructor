@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -15,6 +14,7 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dsoumis.dbpediavirtualsparqlqueryconstructor.dtos.CustomParcelablePairDto;
 import com.dsoumis.dbpediavirtualsparqlqueryconstructor.dtos.DbpediaLookupResultDto;
 
 import java.util.Collections;
@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewGroup mainLayout;
 
-    private int xDelta;
-    private int yDelta;
+
 
 //    private Map<>
 
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Called when the user taps the "SEARCH DBPEDIA" button
+    @SuppressWarnings("deprecation")
     public void searchDbpedia(View view) {// Do something in response to button
 
         final EditText editText = findViewById(R.id.search_dbpedia_query);
@@ -75,12 +75,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SEARCH_ACTIVITY_CODE && resultCode == Activity.RESULT_OK) {
-            final DbpediaLookupResultDto dbpediaLookupResultDto = data.getParcelableExtra("dbpediaLookupResultDto");
-            createListViewWithDbpediaResult(dbpediaLookupResultDto);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SEARCH_ACTIVITY_CODE) {
+                final DbpediaLookupResultDto dbpediaLookupResultDto = data.getParcelableExtra("dbpediaLookupResultDto");
+                createListViewWithDbpediaResult(dbpediaLookupResultDto);
+            } else if (requestCode == RESOURCE_PROPERTIES_ACTIVITY_CODE) {
+                final CustomParcelablePairDto customParcelablePairDto = data.getParcelableExtra("customParcelablePairDto");
+                final String property = customParcelablePairDto.getFirstValue();
+                final String value = customParcelablePairDto.getSecondValue();
+                createListViewWithDbpediaResult(new DbpediaLookupResultDto(value.substring(value.lastIndexOf('/') + 1).trim(), value));
+            }
         }
     }
 
+    @SuppressWarnings("deprecation")
     private void createListViewWithDbpediaResult(final DbpediaLookupResultDto dbpediaLookupResultDto){
 
         ListView listView = new ListView(this);
@@ -94,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener((adapterView, view, i, l) -> {
             final Intent intent = new Intent(MainActivity.this, ResourcePropertiesActivity.class);
             intent.putExtra("resource", dbpediaLookupResultDto.getUri().substring(dbpediaLookupResultDto.getUri().lastIndexOf('/') + 1).trim());
+            //TODO: maybe we can hold the last clicked id to make the "arrow" connection with property and value
             startActivityForResult(intent, RESOURCE_PROPERTIES_ACTIVITY_CODE);
             return false;
         });
@@ -104,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
 
     private View.OnTouchListener onTouchListener () {
         return new View.OnTouchListener() {
+
+            private int xDelta;
+            private int yDelta;
 
             @SuppressLint("ClickableViewAccessibility")
             @Override

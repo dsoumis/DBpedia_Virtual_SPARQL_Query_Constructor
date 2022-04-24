@@ -1,17 +1,31 @@
 package com.dsoumis.dbpediavirtualsparqlqueryconstructor;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dsoumis.dbpediavirtualsparqlqueryconstructor.adapters.ResourcePropertiesExpandableListAdapter;
+import com.dsoumis.dbpediavirtualsparqlqueryconstructor.dtos.CustomParcelablePairDto;
 import com.dsoumis.dbpediavirtualsparqlqueryconstructor.singletons.OkHttpClientSingleton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -50,9 +64,56 @@ public class ResourcePropertiesActivity extends AppCompatActivity {
                 if (!response.isSuccessful()) onResponseFailure();
 
                 final String result = Objects.requireNonNull(response.body()).string();
-                Log.d("Query_result", "Result: " + result);
+                final Map<String, List<String>> valuesByPropertyMap = createValuesByPropertyMapFromJsonResult(result);
+
+                runOnUiThread(() -> createExpandableListView(valuesByPropertyMap));
+            }
+        });
+    }
+
+    private Map<String, List<String>> createValuesByPropertyMapFromJsonResult(final String result) {
+        Log.d("Query_result", "Result: " + result);
+        final Map<String, List<String>> valuesByPropertyMap = new TreeMap<>();
+        try {
+            final JSONObject jsonResult = new JSONObject(result);
+            final JSONArray results = jsonResult.getJSONObject("results").getJSONArray("bindings");
+            for (int index = 0; index < results.length(); ++index) {
+
+                final JSONObject innerObject = results.getJSONObject(index);
+
+                final String currentProperty = innerObject.getJSONObject("property").getString("value");
+                final String currentValue = innerObject.getJSONObject("value").getString("value");
+
+                if (!valuesByPropertyMap.containsKey(currentProperty)) {
+                    valuesByPropertyMap.put(currentProperty, new ArrayList<>(Collections.singletonList(currentValue)));
+                } else {
+                    Objects.requireNonNull(valuesByPropertyMap.get(currentProperty)).add(currentValue);
+                }
 
             }
+        } catch (JSONException e) {
+            Log.d("JSON ERROR", "Message of fault: " + Log.getStackTraceString(e));
+            onResponseFailure();
+        }
+
+        return valuesByPropertyMap;
+    }
+
+    private void createExpandableListView(final Map<String, List<String>> valuesByPropertyMap) {
+        final ExpandableListView expandableListView = findViewById(R.id.propertiesWithValuesExpandableListView);
+        final ExpandableListAdapter expandableListAdapter = new ResourcePropertiesExpandableListAdapter(ResourcePropertiesActivity.this,
+                valuesByPropertyMap);
+        expandableListView.setAdapter(expandableListAdapter);
+        expandableListView.setOnChildClickListener((expandableListView1, view, groupPosition, childPosition, id) -> {
+
+            final String propertyClicked = (String) valuesByPropertyMap.keySet().toArray()[groupPosition];
+
+            setResult(Activity.RESULT_OK, new Intent().putExtra("customParcelablePairDto",
+                    new CustomParcelablePairDto(propertyClicked,
+                            Objects.requireNonNull(Objects.requireNonNull(valuesByPropertyMap.get(propertyClicked)).get(childPosition)))));
+            finish();
+
+            return false;
         });
     }
 

@@ -9,7 +9,7 @@ public class DbpediaLookupResultDto implements Parcelable {
     private String label;
     private String uri;
 
-    public DbpediaLookupResultDto(String label, String uri) {
+    public DbpediaLookupResultDto(final String label, final String uri) {
         this.label = label;
         this.uri = uri;
     }

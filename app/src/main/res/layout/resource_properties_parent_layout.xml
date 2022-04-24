@@ -3,11 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ExpandableListView
-        android:id="@+id/propertiesWithValuesExpandableListView"
-        android:layout_weight="1"
+    
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:padding="0dp"/>
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/textParent"
+        />
+
 </LinearLayout>
