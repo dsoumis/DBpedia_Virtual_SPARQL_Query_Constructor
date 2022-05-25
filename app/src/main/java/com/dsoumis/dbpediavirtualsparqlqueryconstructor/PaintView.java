@@ -56,5 +56,9 @@ public class PaintView extends View {
         startRadians += ((x2 >= x1) ? 90 : -90) * Math.PI / 180;
         return Math.toDegrees(startRadians);
     }
+
+    public int getPaintViewColor() {
+        return linePaint.getColor();
+    }
 }
 

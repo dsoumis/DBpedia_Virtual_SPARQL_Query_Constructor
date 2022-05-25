@@ -8,13 +8,16 @@ import java.util.List;
 
 public class ListViewPropertiesDto {
     private ArrayAdapter<String> arrayAdapter;
+    private List<String> items;
     private List<ConnectionViewDto> connectionChildrenViews;
     private List<ConnectionViewDto> connectionParentViews;
 
     public ListViewPropertiesDto(final ArrayAdapter<String> arrayAdapter,
+                                 final List<String> items,
                                  final List<ConnectionViewDto> connectionChildrenViews,
                                  final List<ConnectionViewDto> connectionParentViews) {
         this.arrayAdapter = arrayAdapter;
+        this.items = items;
         this.connectionChildrenViews = connectionChildrenViews;
         this.connectionParentViews = connectionParentViews;
     }
@@ -25,6 +28,14 @@ public class ListViewPropertiesDto {
 
     public void setArrayAdapter(final ArrayAdapter<String> arrayAdapter) {
         this.arrayAdapter = arrayAdapter;
+    }
+
+    public List<String> getItems() {
+        return items;
+    }
+
+    public void setItems(List<String> items) {
+        this.items = items;
     }
 
     public List<ConnectionViewDto> getConnectionChildrenViews() {

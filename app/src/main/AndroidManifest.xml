@@ -25,6 +25,9 @@
         <activity android:name=".ResourcePropertiesActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".QueryAndResultsActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>
