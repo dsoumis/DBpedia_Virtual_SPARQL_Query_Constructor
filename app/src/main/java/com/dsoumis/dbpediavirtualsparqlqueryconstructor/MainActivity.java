@@ -99,10 +99,16 @@ public class MainActivity extends AppCompatActivity {
         query.append("PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n");
         query.append("SELECT DISTINCT ");
 
+        final StringBuilder variables = new StringBuilder();
+
         listViewPropertiesByListViewId.forEach((key, value) -> {
             final String firstItem = value.getItems().get(0);
-            if (firstItem.contains("?var")) query.append(firstItem).append(" ");
+            if (firstItem.contains("?var")) variables.append(firstItem).append(" ");
         });
+
+        if (variables.length() == 0) return;
+
+        query.append(variables);
 
         final StringBuilder conditions = new StringBuilder();
         conditions.append("\nWHERE { ");
@@ -114,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Intent intent = new Intent(MainActivity.this, QueryAndResultsActivity.class); //Used to pass values from MainActivity(this) to SearchActivity
         intent.putExtra("query", query.toString());
+        intent.putExtra("variables", variables.toString());
         startActivity(intent);
     }
 
@@ -243,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnTouchListener(onTouchListener());
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             long currTime = System.currentTimeMillis();
-            if (currTime - lastClickTime < ViewConfiguration.getDoubleTapTimeout()) {
+            if (currTime - lastClickTime < ViewConfiguration.getDoubleTapTimeout() && !listOfListview.get(0).contains("?var")) {
                 final String var = "?var" + varCounter++;
                 listOfItemUrisOfListview.set(0, var);
                 listOfListview.set(0, var);

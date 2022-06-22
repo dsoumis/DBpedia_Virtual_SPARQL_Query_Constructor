@@ -3,4 +3,5 @@
     <string name="app_label">DBpediaVirtualSPARQLQueryConstructor</string>
     <string name="search_hint">Type your search here</string>
     <string name="search_dbpedia">Search DBpedia</string>
+    <string name="run_query">Run query</string>
 </resources>

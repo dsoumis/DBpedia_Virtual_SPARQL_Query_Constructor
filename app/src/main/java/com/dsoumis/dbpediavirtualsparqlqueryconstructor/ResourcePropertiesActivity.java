@@ -41,10 +41,10 @@ public class ResourcePropertiesActivity extends AppCompatActivity {
         setContentView(R.layout.resource_properties_layout);
 
         final Intent intent = getIntent();
-        final String resource = intent.getStringExtra("resource");
+        String resource = intent.getStringExtra("resource");
 
         final OkHttpClient client = OkHttpClientSingleton.getClient();
-
+        resource = resource.replace(",", "%2C");
         final String urlQuery = "https://dbpedia.org/sparql?default-graph-uri=http://dbpedia.org&" +
                 "query=select+distinct+?property+?value+?label+{+" +
                 "dbr:" + resource + "+?property+?value+.+" +
