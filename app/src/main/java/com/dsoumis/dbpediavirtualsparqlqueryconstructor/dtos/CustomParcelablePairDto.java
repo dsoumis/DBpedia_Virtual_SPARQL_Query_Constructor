@@ -5,8 +5,8 @@ import android.os.Parcelable;
 
 public class CustomParcelablePairDto implements Parcelable {
 
-    private String firstValue;
-    private String secondValue;
+    private final String firstValue;
+    private final String secondValue;
 
     public CustomParcelablePairDto(final String firstValue, final String secondValue) {
         this.firstValue = firstValue;
@@ -45,15 +45,8 @@ public class CustomParcelablePairDto implements Parcelable {
         return firstValue;
     }
 
-    public void setFirstValue(String firstValue) {
-        this.firstValue = firstValue;
-    }
-
     public String getSecondValue() {
         return secondValue;
     }
 
-    public void setSecondValue(String secondValue) {
-        this.secondValue = secondValue;
-    }
 }

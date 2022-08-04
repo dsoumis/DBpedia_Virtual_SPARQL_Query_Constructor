@@ -1,4 +1,4 @@
-package com.dsoumis.dbpediavirtualsparqlqueryconstructor;
+package com.dsoumis.dbpediavirtualsparqlqueryconstructor.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dsoumis.dbpediavirtualsparqlqueryconstructor.R;
 import com.dsoumis.dbpediavirtualsparqlqueryconstructor.adapters.ResourcePropertiesExpandableListAdapter;
 import com.dsoumis.dbpediavirtualsparqlqueryconstructor.dtos.CustomParcelablePairDto;
 import com.dsoumis.dbpediavirtualsparqlqueryconstructor.singletons.OkHttpClientSingleton;

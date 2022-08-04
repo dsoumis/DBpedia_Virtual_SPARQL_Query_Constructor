@@ -9,12 +9,17 @@
         android:layout_width="wrap_content"
         />
 
-    <TableLayout
-        android:id="@+id/table_layout_id"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/text_view_query_id"
-        android:background="@android:color/white"
-        android:layout_margin="10dp"/>
+        android:scrollbars="none"
+        android:layout_below="@+id/text_view_query_id">
+        <TableLayout
+            android:id="@+id/table_layout_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:layout_margin="10dp"/>
+    </ScrollView>
 
 </RelativeLayout>

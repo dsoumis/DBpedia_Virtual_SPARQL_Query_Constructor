@@ -1,17 +1,16 @@
-package com.dsoumis.dbpediavirtualsparqlqueryconstructor;
+package com.dsoumis.dbpediavirtualsparqlqueryconstructor.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dsoumis.dbpediavirtualsparqlqueryconstructor.R;
 import com.dsoumis.dbpediavirtualsparqlqueryconstructor.dtos.DbpediaLookupResultDto;
 import com.dsoumis.dbpediavirtualsparqlqueryconstructor.parsers.DbpediaLookupXmlParser;
 import com.dsoumis.dbpediavirtualsparqlqueryconstructor.singletons.OkHttpClientSingleton;
@@ -66,7 +65,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                //Note to self: response.body().string() can be consumed only once. Calling it twice will give a FATAL EXCEPTION: OkHttp Dispatcher
+                //response.body().string() can be consumed only once. Calling it twice will give a FATAL EXCEPTION: OkHttp Dispatcher
                 final String dbpediaResultsString = Objects.requireNonNull(response.body()).string();
                 Log.d("dbpediaResults: ", dbpediaResultsString);
                 runOnUiThread(() -> createDbpediaResults(dbpediaResultsString));

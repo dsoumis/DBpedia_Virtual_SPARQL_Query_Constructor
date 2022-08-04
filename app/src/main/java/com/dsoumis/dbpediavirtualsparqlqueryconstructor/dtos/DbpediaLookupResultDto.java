@@ -6,8 +6,8 @@ import android.os.Parcelable;
 import java.util.Objects;
 
 public class DbpediaLookupResultDto implements Parcelable {
-    private String label;
-    private String uri;
+    private final String label;
+    private final String uri;
 
     public DbpediaLookupResultDto(final String label, final String uri) {
         this.label = label;
@@ -48,14 +48,6 @@ public class DbpediaLookupResultDto implements Parcelable {
 
     public String getUri() {
         return uri;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
     }
 
     @Override

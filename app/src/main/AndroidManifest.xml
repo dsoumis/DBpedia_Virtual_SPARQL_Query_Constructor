@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DBpediaVirtualSPARQLQueryConstructor">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,14 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".activities.SearchActivity"
+            android:parentActivityName=".activities.MainActivity">
         </activity>
-        <activity android:name=".ResourcePropertiesActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".activities.ResourcePropertiesActivity"
+            android:parentActivityName=".activities.MainActivity">
         </activity>
-        <activity android:name=".QueryAndResultsActivity"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".activities.QueryAndResultsActivity"
+            android:parentActivityName=".activities.MainActivity">
         </activity>
     </application>
 

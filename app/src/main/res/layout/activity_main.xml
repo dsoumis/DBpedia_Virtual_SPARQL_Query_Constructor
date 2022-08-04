@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <LinearLayout
         android:id="@+id/mainLinear"
@@ -47,6 +47,6 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/run_query"
-        android:onClick="createQuery"/>
+        android:onClick="runQuery"/>
 
 </RelativeLayout>

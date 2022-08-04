@@ -1,16 +1,15 @@
 package com.dsoumis.dbpediavirtualsparqlqueryconstructor.dtos;
 
 import android.graphics.Color;
-import android.view.View;
 import android.widget.ArrayAdapter;
 
 import java.util.List;
 
 public class ListViewPropertiesDto {
-    private ArrayAdapter<String> arrayAdapter;
-    private List<String> items;
-    private List<ConnectionViewDto> connectionChildrenViews;
-    private List<ConnectionViewDto> connectionParentViews;
+    private final ArrayAdapter<String> arrayAdapter;
+    private final List<String> items;
+    private final List<ConnectionViewDto> connectionChildrenViews;
+    private final List<ConnectionViewDto> connectionParentViews;
 
     public ListViewPropertiesDto(final ArrayAdapter<String> arrayAdapter,
                                  final List<String> items,
@@ -26,32 +25,16 @@ public class ListViewPropertiesDto {
         return arrayAdapter;
     }
 
-    public void setArrayAdapter(final ArrayAdapter<String> arrayAdapter) {
-        this.arrayAdapter = arrayAdapter;
-    }
-
     public List<String> getItems() {
         return items;
-    }
-
-    public void setItems(List<String> items) {
-        this.items = items;
     }
 
     public List<ConnectionViewDto> getConnectionChildrenViews() {
         return connectionChildrenViews;
     }
 
-    public void setConnectionChildrenViews(final List<ConnectionViewDto> connectionChildrenViews) {
-        this.connectionChildrenViews = connectionChildrenViews;
-    }
-
     public List<ConnectionViewDto> getConnectionParentViews() {
         return connectionParentViews;
-    }
-
-    public void setConnectionParentViews(final List<ConnectionViewDto> connectionParentViews) {
-        this.connectionParentViews = connectionParentViews;
     }
 
     public static int getColorOfProperty(final int position) {

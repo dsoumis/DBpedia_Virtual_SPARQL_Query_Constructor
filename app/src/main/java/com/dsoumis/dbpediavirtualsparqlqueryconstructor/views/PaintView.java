@@ -1,11 +1,10 @@
-package com.dsoumis.dbpediavirtualsparqlqueryconstructor;
+package com.dsoumis.dbpediavirtualsparqlqueryconstructor.views;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 @SuppressLint("ViewConstructor")
@@ -19,6 +18,7 @@ public class PaintView extends View {
     @SuppressLint("ResourceAsColor")
     public PaintView(final Context context, final View view1, final View view2, final int color) {
         super(context);
+        this.setId(View.generateViewId());
 
         this.view1 = view1;
         this.view2 = view2;
@@ -57,8 +57,5 @@ public class PaintView extends View {
         return Math.toDegrees(startRadians);
     }
 
-    public int getPaintViewColor() {
-        return linePaint.getColor();
-    }
 }
 
